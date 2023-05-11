@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css'>
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        
+        
+
+.buttons-container {
+    position: absolute;
+    display: flex;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999999999999;
+
+}
+
+body{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#camera {
+    position: fixed;
+    bottom:  0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    height: auto;
+    max-height: 100%;
+    object-fit: cover;
+
+}  
+
+/*    */
+@media (max-width: 1180px) {
+    #camera {
+        position: fixed;
+        bottom:  0;
+        left: 0;
+        z-index: 999;
+        height: 900px;
+        width: 100%;
+        object-fit: cover;
+    }
+} 
+    </style>
+
+
+
+
+
+</head>
+<body>
+    <div  id="ApartadoNavbar" class="fixed-top mb-5 overflow-hidden"  data-offset-top="10"  >
+        <nav class="navbar  bg-body-primary ">
+            <div class="container-fluid d-flex justify-content-center bg-body-primary">
+                <a onclick="SeccionInicio()" class=" nav-link w-auto mr-3 px-4" href="index.html"><img style="height: 50px;" src="svg/logo the end ok.svg"></img></a>
+            </div>
+        </nav>
+    </div>
+
+
+
+        <div class="w-100 h-100 row p-0 m-0">
+            <div id="map" class="col" style="height: 1000px; max-height: 100%;min-height: 100%;">
+                <video id="camera"  autoplay></video>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <button id="btnEncenderApagar" class="btn btn-secondary m-2 p-2" onclick="toggleCamera()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-camera-video-off" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518l.605.847zM1.428 4.18A.999.999 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634l.58.814zM15 11.73l-3.5-1.555v-4.35L15 4.269v7.462zm-4.407 3.56-10-14 .814-.58 10 14-.814.58z"/></svg>
+            </button>
+            <button id="btnCambiarCamara" class="btn btn-secondary m-2 p-2" onclick="changeCamera()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/></svg>
+            </button>
+            <button id="btnEscanearQR" class="btn btn-secondary m-2 p-2" onclick="scanQR()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-qr-code-scan" viewBox="0 0 16 16"><path d="M0 .5A.5.5 0 0 1 .5 0h3a.5.5 0 0 1 0 1H1v2.5a.5.5 0 0 1-1 0v-3Zm12 0a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0V1h-2.5a.5.5 0 0 1-.5-.5ZM.5 12a.5.5 0 0 1 .5.5V15h2.5a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5v-3a.5.5 0 0 1 .5-.5Zm15 0a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1 0-1H15v-2.5a.5.5 0 0 1 .5-.5ZM4 4h1v1H4V4Z"/><path d="M7 2H2v5h5V2ZM3 3h3v3H3V3Zm2 8H4v1h1v-1Z"/><path d="M7 9H2v5h5V9Zm-4 1h3v3H3v-3Zm8-6h1v1h-1V4Z"/><path d="M9 2h5v5H9V2Zm1 1v3h3V3h-3ZM8 8v2h1v1H8v1h2v-2h1v2h1v-1h2v-1h-3V8H8Zm2 2H9V9h1v1Zm4 2h-1v1h-2v1h3v-2Zm-4 2v-1H8v1h2Z"/><path d="M12 9h2V8h-2v1Z"/></svg>
+            </button>
+        </div>
+        
+        
+
+        <script>
+            var videoElement = document.getElementById("camera");
+            var btnEncenderApagar = document.getElementById("btnEncenderApagar");
+            var btnCambiarCamara = document.getElementById("btnCambiarCamara");
+
+            var mediaStream;
+            var currentCamera = 0;
+        
+            function toggleCamera() {
+                if (mediaStream) {
+                // Si la cámara ya está encendida, la apagamos
+                mediaStream.getTracks().forEach(function(track) {
+                    track.stop();
+                });
+                mediaStream = null;
+                btnEncenderApagar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-camera-video-off" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M10.961 12.365a1.99 1.99 0 0 0 .522-1.103l3.11 1.382A1 1 0 0 0 16 11.731V4.269a1 1 0 0 0-1.406-.913l-3.111 1.382A2 2 0 0 0 9.5 3H4.272l.714 1H9.5a1 1 0 0 1 1 1v6a1 1 0 0 1-.144.518l.605.847zM1.428 4.18A.999.999 0 0 0 1 5v6a1 1 0 0 0 1 1h5.014l.714 1H2a2 2 0 0 1-2-2V5c0-.675.334-1.272.847-1.634l.58.814zM15 11.73l-3.5-1.555v-4.35L15 4.269v7.462zm-4.407 3.56-10-14 .814-.58 10 14-.814.58z"/></svg>';
+                
+                videoElement.srcObject = null;
+                } else {
+                // Si la cámara está apagada, la encendemos con la cámara actual
+                navigator.mediaDevices.getUserMedia({ video: {facingMode: currentCamera === 0 ? 'user' : 'environment'} })
+                    .then(function(stream) {
+                    mediaStream = stream;
+                    videoElement.srcObject = stream;
+                    btnEncenderApagar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-camera-video" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5zm11.5 5.175 3.5 1.556V4.269l-3.5 1.556v4.35zM2 4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H2z"/></svg>';
+
+                    })
+                    .catch(function(error) {
+                    console.error("Error al acceder a la cámara:", error);
+                    });
+                }
+            }
+            function changeCamera() {
+                if (mediaStream) {
+                // Si la cámara está encendida, la apagamos antes de cambiar de cámara
+                mediaStream.getTracks().forEach(function(track) {
+                    track.stop();
+                });
+                mediaStream = null;
+                videoElement.srcObject = null;
+                }
+        
+              // Cambiamos la cámara actual
+              currentCamera = 1 - currentCamera; // Alternamos entre 0 y 1
+              toggleCamera(); // Encendemos la nueva cámara
+            }
+
+
+
+function scanQR() {
+    if ('mediaDevices' in navigator && 'getUserMedia' in navigator.mediaDevices && 'BarcodeDetector' in window) {
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: currentCamera === 0 ? 'user' : 'environment' } })
+            .then(function (stream) {
+                videoElement.srcObject = stream;
+                var barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
+                videoElement.addEventListener('loadeddata', function () {
+                    var canvas = document.createElement('canvas');
+                    var context = canvas.getContext('2d');
+                    canvas.width = videoElement.videoWidth;
+                    canvas.height = videoElement.videoHeight;
+                    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                    barcodeDetector.detect(canvas)
+                        .then(function (barcodes) {
+                            if (barcodes.length > 0) {
+                                var qrValue = barcodes[0].rawValue;
+                                // Mostrar una alerta con enlace al código QR detectado
+                                alert('Código QR detectado: ' + qrValue);
+                                window.location.href = qrValue;
+                            } else {
+                                alert('No se ha detectado ningún código QR.');
+                            }
+                            mediaStream.getTracks().forEach(function (track) {
+                                track.stop();
+                            });
+                            mediaStream = null;
+                            videoElement.srcObject = null;
+                        })
+                        .catch(function (error) {
+                            console.error('Error al detectar código QR:', error);
+                        });
+                });
+            })
+            .catch(function (error) {
+                console.error('Error al acceder a la cámara:', error);
+            });
+    } else {
+        alert('Tu navegador no soporta la lectura de códigos QR.');
+    }
+}
+
+        </script>
+        
+
+
+
+</body>
+</html>

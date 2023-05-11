@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frm Cementerio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="css/leaflet.css">
+<style>
+        html, body {
+        background: url(img/fondo.png) no-repeat center center fixed;
+        background-size: cover;
+        
+    }
+
+</style>
+</head>
+<body>
+  <div  id="ApartadoNavbar" class="sticky-top mb-3 overflow-hidden"  data-offset-top="10"  >
+    <nav class="navbar  bg-body-primary ">
+        <div class="container-fluid d-flex justify-content-center bg-body-primary">
+            <a onclick="SeccionInicio()" class=" nav-link w-auto mr-3 px-4" href="index.html"><img style="height: 50px;" src="svg/logo the end ok.svg"></img></a>
+        </div>
+    </nav>
+</div>
+    <div id="EntidadesABM" class="container">
+        <form>
+          <div class="col-lg-12 col-sm-12 mb-2">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">Informacion</h6>
+                    <p class="m-0">En este apartado se cargara la informacion.</p>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap">
+    
+                      <div class="col-lg-12 sm-12 form-group">
+                        <p class="m-0">Tipo de Cementerio</p>
+                        <select id="cbo_EntidadTipo" class="form-control form-control-user">
+                          <option value="1"></option>
+                        </select>
+                      </div> 
+    
+                      <div class="col-lg-4 sm-12 form-group">
+                        <p class="m-0">Razon Social</p>
+                        <input type="text" class="form-control form-control-user" id="txt_RazonSocial"  placeholder="Escribe aquí">
+                      </div>
+                  
+                      <div class="col-lg-4 sm-12 form-group">
+                        <p class="m-0">Nombre de fantasia</p>
+                        <input type="text" class="form-control form-control-user" id="txt_Fantasia" placeholder="Escribe aquí">
+                      </div>
+                
+                      <div class="col-lg-4 sm-12 form-group">
+                        <p class="m-0">Fecha de fundacion</p>
+                        <input type="date" class="form-control form-control-user" id="dto_Fundaciom" >
+                      </div>
+                  
+                      <div class="col-lg-12 sm-12 form-group">
+                        <p class="m-0">Horarios</p>
+                        <input type="text" class="form-control form-control-user" id="txt_Horarios" placeholder="Escribe aquí">
+                      </div>
+    
+                      <div class="col-12 col-sm-6 col-md-4">
+                        <p class="m-0">Tamaño</p>
+                        <input type="number" id="txt_Tamaño" class="form-control form-control-user" placeholder="Escribe aquí">
+                      </div>  
+    
+                      <div class="col-12 col-sm-6 col-md-4">
+                        <p class="m-0">Unidad medida</p>
+                        <select  id="cbo_UnidadMedida" class="form-control form-control-user">
+                          <option value="1"></option>
+                        </select>
+                      </div>
+    
+                      <div class="col-12 col-sm-6  col-md-4">
+                        <p class="m-0">Cantidad de tumbas</p>
+                        <input type="number" id="txt_CantidadTumbas" class="form-control form-control-user" placeholder="Escribe aquí">
+                      </div>
+    
+                      <div class="col-lg-12 sm-12 form-group" >
+                        <p class="m-0">Informacion General</p>
+                        <textarea class="form-control form-control-user" id="txt_InformacionGeneral" placeholder="Escribe aquí" cols="30" rows="5" style="width: 100%;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
+     
+          <div class="col-lg-12 col-sm-12 mb-2">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-success">Ubicacion</h6>
+                    <p class="m-0">En este apartado carga tu ubicacion en el mapa.</p>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-wrap">
+    
+    
+                        <div class="col-lg-12 sm-12 form-group">
+
+                            <p class="m-0">Dirección</p>
+                            <input id="txtDireccion" type="text" autocomplete="off" class="form-control" style="cursor: pointer;" placeholder="Escribe aquí su dirección">
+
+                            <input id="txtGeoLatitud" type="text" class="form-control" hidden>
+                            <input id="txtGeoLongitud" type="text" class="form-control" hidden>
+                            <p class="m-0" hidden>Pais</p>
+                            <input id="country" type="text" class="form-control" hidden>
+                            <p class="m-0" hidden>Provincia</p>
+                            <input id="province" type="text" class="form-control" hidden>
+                            <p class="m-0" hidden>Localidad</p>
+                            <input id="locality" type="text" class="form-control" hidden> 
+                            <p class="m-0" hidden>Direccion</p>
+                            <input id="Direccion" type="text" class="form-control" hidden> 
+
+                        </div>
+                        <div class="col-lg-12 sm-12 form-group">
+                    
+                            <div id="map" style="height: 400px ; width: 100%;"></div>
+
+                        </div>
+
+
+                      
+    
+                    </div>
+                 </div>
+             </div>
+          </div>
+    
+          <div class="col-lg-12 col-sm-12 mb-2 ">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-success">Imagenes</h6>
+                  <p class="m-0">En este apartado se cargara la imagen.</p>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex flex-wrap">
+    
+                    <div class="container" id="Multimedia">
+                      <div class="col-lg-12 sm-12 form-group text-center">
+                 
+                        <p class="m-0">Imagenes para el cementerio</p>
+                        <input onchange="return CargarImagenes()" type="file"  id="inp_Imagen" accept="image/png, image/jpeg" multiple>
+            
+                      </div>
+    
+                      <div class="col-lg-12 sm-12 form-group">
+                        <p class="m-0">haz click sobre ellas para eliminarlas</p>
+                        <div id="add-photo-container" class="row"></div>
+                        <div id="Modificar-photo-container" class="row"></div>
+                      </div>
+    
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+    
+          <div class="col-lg-12 col-sm-12 mb-2">
+            <div class="card shadow mb-4" style="padding-left: 0px; padding-right: 0px;">
+                <div class="card-header py-3">
+                    <!--style="background: #13865C;"-->
+                    <h6 class="m-0 font-weight-bold text-success">Guardar</h6>
+                    <p class="m-0">Una vez que hayas completado los datos requeridos presiona en el botón guardar</p>
+                </div>
+                <div class="card-body">
+                    <div class="col-lg-12 sm-12 form-group text-center">
+                      <input class="btn btn-success btn-user btn-block" type="button" onclick="AgregarDetalle(2)" value="Guardar" id="btn_Guardar">
+                    </div>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkwjNcHgNdVpl51drXkaAHn_6DU2if1s4&libraries=places"></script>
+
+
+    <script src="/js/FrmCementerio.js"></script>
+    <script src="/js/DeserealizeToken.js"></script>
+    <script src="/js/jwt-decode.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script>
+    $(document).on("click", "#add-photo-container .image-wrapper", function (e) {
+      $(this).parent().remove();
+    });
+
+    $(document).ready(function(){
+      CargarEntidadTipo();
+      CargarUnidad();
+    })
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head id="Head1">
+    <title>The End Ok - Login</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min2.css">
+    <style type="text/css">
+    html, body {
+        background: url(img/fondo.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        overflow: hidden !important;
+    }
+    input{
+        text-transform: lowercase;
+    }
+</style>
+
+</head>
+<body>
+<div id="ApartadoTitulo" class="d-flex justify-content-center aling-items-center">
+    <div style="max-width: 40rem;margin-top: 150px; margin-bottom: 30px;">
+        <div class="card" style="background: transparent !important; border: none;">
+            <div class="row justify-content-center aling-items-center">
+                    <a  class="" href="index.html" style="border-radius: 2px solid black;">
+                        <img src="svg/logo the end ok.svg" frameborder="0"></img>
+                    </a>
+                    <div class="mt-5">
+                        <h3 class="text-center" style="color: #ffffff; font-family: Georgia, 'Times New Roman', Times, serif;">¿A quién recuerdas hoy?</h3> 
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ApartadoLogin" >
+    <div class="d-flex justify-content-center aling-items-center">
+    <div class="col-md-4 ml-3 mr-3" style="max-width: 40rem;">
+        <form action="">
+            <div class="card" style="background: transparent !important;border-color: transparent">
+                <div class="card-body" >
+                    <h5 class="card-title mb-3" style="text-align: center; color: #fff; font-size: 30px; text-transform: capitalize;">Ingresar</h5>
+                    <div class="form-group mb-3" >
+                        <input name="TxtEmail" type="text" id="usuario" class="form-control" placeholder="USUARIO" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <input name="TxtPass" type="password" id="contrasena" class="form-control"  placeholder="CONTRASEÑA" />
+                    </div>
+                    <button id="btnLogin" class="btn btn-primary" onclick="Login()" type="button" style="width: 100%; background: #DDB445; border: 1px solid #DDB445; text-transform: capitalize;">INGRESAR</button>
+                </div>
+                <button class="text-dark btn" type="button" onclick="RegistrateAqui()">Regístrate aquí</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>   
+<div id="ApartadoRegistro">
+    <div class="d-flex justify-content-center aling-items-center">
+        <div class="col-md-4 ml-3 mr-3" style="max-width: 40rem;">
+            <form action="">
+                <div class="card" style="background: transparent !important;border-color: transparent">
+                    <div class="card-body" >
+                        <h5 class="card-title mb-3" style="text-align: center; color: #fff; font-size: 30px; text-transform: capitalize;">Regístrate</h5>
+                    <div class="form-group mb-3" >
+                        <input  type="text" id="NuevoUsuario" class="form-control"  placeholder="NOMBRE" />
+                    </div>
+                    <div class="form-group mb-3" >
+                        <input  type="text" id="NuevoEmail" class="form-control"  placeholder="EMAIL" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <input  type="password" id="NuevoContrasena" class="form-control"  placeholder="CONTRASEÑA" />
+                    </div>
+                        <button  id="btnRegister" class="btn btn-primary" type="button" onclick="Register()" style="width: 100%; background: #54328D ; border: 1px solid #54328D ; text-transform: capitalize;">REGÍSTRATE</button>
+                    </div>
+                <button class="text-dark btn" type="button" onclick="LogeateAqui()">Volver al login</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+</div> 
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min2.js"></script>
+    <script src="js/jwt-decode.js"></script>
+    <script src="js/DeserealizeToken.js"></script>
+    <script src="js/URL-API.js"></script>
+
+
+<script>
+    $(document).ready(function(){
+        $("#ApartadoRegistro").hide();
+        $("#ApartadoLogin").show();
+    })
+    function RegistrateAqui(){
+        $("#ApartadoLogin").hide();
+        $("#ApartadoRegistro").show();
+    }     
+    function LogeateAqui(){
+        $("#ApartadoLogin").show();
+        $("#ApartadoRegistro").hide();
+    }  
+    function Login(){
+        var User = $("#usuario").val();
+        var Pass = $("#contrasena").val();
+        var settings = {
+            url: URLAPI + "Auth/login",
+            method: "POST",
+            timeout: 0,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: JSON.stringify({
+                username: User,
+                password: Pass,
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            localStorage.setItem("Token", response.token);
+            location.replace("index.html");
+        });
+        }
+
+    function Register(){
+        var TxtNombre = $("#NuevoUsuario").val();
+        var TxtEmail = $("#NuevoEmail").val();
+        var TxtContrasena = $("#NuevoContrasena").val();
+        var settings = {
+            url: URLAPI + "Auth/register",
+            method: "POST",
+            timeout: 0,
+            headers: {
+                accept: "*/*",
+                "Content-Type": "application/json",
+            },
+            data: JSON.stringify({
+                username: TxtNombre,
+                email: TxtEmail,
+                password: TxtContrasena,
+                roleName: "Admin",
+            }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+
+            
+            Logeado();
+            console.log(result);
+        });
+        }
+
+
+    const Logeado = async () =>{
+
+        var TxtNombre = $("#NuevoUsuario").val();
+        var TxtEmail = $("#NuevoEmail").val();
+        var TxtContrasena = $("#NuevoContrasena").val();
+        
+            var settings = {
+            url: URLAPI + "Auth/login",
+            method: "POST",
+            timeout: 0,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            data: JSON.stringify({
+                username: TxtNombre,
+                password: TxtContrasena,
+            }),
+        };
+        
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            localStorage.setItem("Token", response.token);
+            QRGratuitos()
+            
+            
+        });
+        }
+        
+        const QRGratuitos = async ()=>{
+        Datos = GetInformationToken()
+
+        var settings = {
+        "url": URLAPI + "QrUsers/Registrarse",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+            "accept": "*/*",
+            "Content-Type": "application/json"
+            },
+        "data": JSON.stringify({
+            "idUsuario": Datos.userId,
+            "cantidadQr": 2
+        }),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+            alert("Se Acreditaron tus 2 token Gratuitos")
+            location.replace("index.html");
+        });
+    }        
+</script>
+
+</body>
+</html>

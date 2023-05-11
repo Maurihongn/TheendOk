@@ -1,0 +1,53 @@
+/********** Template CSS **********/
+:root {
+    --primary: #5B3289   !important;
+    --secondary: #E9B337 ;
+    --light: #FFFFFF;
+    --dark: #152440;
+    --text: #222222 ;
+}
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+body{
+    overflow-x: hidden;
+}
+.navbar{
+    border-bottom:  var(--primary);
+    box-shadow: 0 1px 1px 1px  #5b328950;
+}
+h1,
+h2,
+.font-weight-bold {
+    font-weight: 1000 !important;
+    font-family: 'Lato';
+    color: #5B3289;
+}
+
+h3,
+h4,
+.font-weight-semi-bold {
+    font-weight: 800 !important;
+    font-family: 'Lato', sans-serif;
+    color: #5B3289;
+}
+
+h5,
+h6,
+.font-weight-medium {
+    font-weight: 600 !important;
+    font-family: 'Lato', sans-serif;
+    color: var(--secondary);
+}
+a{
+    font-family: 'Lato';
+    text-decoration: none;
+    color: var(--secondary);
+}
+a:hover{
+    color: #ff6600;
+}
+.nav-link{
+    font-weight: 900;
+}

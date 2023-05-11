@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administracion</title>
+  <link rel="stylesheet" href="/css/bootstrap.min2.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" href="css/index.css">
+  <style>
+  .Tamaño{
+    width: 350px;
+    height: 25px;
+  }
+  .btn {
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    transition: .5s;
+  }
+  .nav-link{
+    color: #fff;
+  }
+
+  .image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+
+.image-wrapper {
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
+  margin-top: 20px;
+  }
+
+.radio-wrapper {
+  margin-top: 10px;
+}
+.tarjetaQR{
+    min-width: 150px;
+}
+
+</style>
+</head>
+<body>
+  <div  id="ApartadoNavbar" class="fixed-top mb-5"  data-offset-top="10"  >
+    <nav class="navbar navbar-expand-lg " style="background-color: #54328D;">
+        <div class="container-fluid" >
+            <a onclick="Buscar();Perfil();" class=" nav-link m-2 px-0" href="index.html"><img style="height: 40px;" src="svg/logo the end ok.svg"></img></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" id="abm-logeados">
+                  <a class="btn nav-link" onclick="SeccionInicio()">Panel de Control</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn nav-link" onclick="SeccionGrillaEntidades()">Entidad</a>
+                </li>
+                <li class="nav-item">
+                  <a class="btn nav-link" onclick="SeccionGrillaDifuntos();">Difuntos</a>
+                </li>
+              </ul>
+              <form class="d-flex justify-content-center" role="search">
+                <a class="btn" type="text" id="EndLogin" onclick="Deslogearse()" href="login.html">Salir</a>
+              </form>
+            </div>
+        </div>
+    </nav>
+</div>
+</div><div style="margin: 80px;"></div>
+
+
+
+
+<div id="Bienvenido" class="container">
+  <div style="margin-top: 150px;margin-bottom: 50px;" >
+    <h1 class="Display-5 text-center mt-5 Presentacion">Bienvenido al apartado</h1>
+    <h1 class="Display-5 mt-2 text-center Presentacion">de Administrador</h1>
+
+  </div>
+
+  <div class="row justify-content-evenly">
+
+    <div class="col-11 col-lg-3 m-2">
+
+      <div class="card tarjetaQR" >
+        <img src="img/comprar qr.jpg" class="W-100 " alt="Comprar 1 QR">
+        <div class="card-body">
+          <h5 class="card-title">Compra de 1 qr</h5>
+          <p class="card-text">Aqui podras comprar 1 qr</p>
+          <div id="paypal-button-container-5usd"></div>
+        </div>
+      </div>
+
+    </div>
+  
+    <div class="col-11 col-lg-3 m-2">
+
+
+      <div class="card tarjetaQR" >
+        <img src="img/comprar qr.jpg" class="W-100 " alt="Comprar 10 QR">
+        <div class="card-body">
+          <h5 class="card-title">Compra 10 Qr</h5>
+          <p class="card-text">Aqui puedes comprar 10 qr</p>
+          <div id="paypal-button-container-30usd" ></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-11 col-lg-3 m-2">
+
+
+      <div class="card tarjetaQR" >
+        <img src="img/comprar qr.jpg" class="W-100 " alt="Comprar 100 QR">
+      <div class="card-body">
+      <h5 class="card-title">Compra 100 Qr</h5>
+      <p class="card-text">Aqui puedes comprar 100 qr</p>
+      <div id="paypal-button-container-150usd" ></div>
+      </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<div id="GrillaEntidades" class="container ">
+  <div class="row mb-3">
+    <input class="btn text-center" type="button" onclick="SeccionEntidadesABM(0)" value="Nueva entidad" id="" style="background-color: #DDB445;border-color: #54328D;color: #54328D;">
+  </div>
+  
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th scope="col">Razon Social</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Activo</th>
+        <th scope="col">Cambiar Estado</th>
+        <th scope="col">Modificar</th>
+      </tr>
+    </thead>
+    <tbody id="GrillaEntidad">
+      
+
+    </tbody>
+  </table>
+</div>
+
+
+<div id="GrillaDifuntos" class="container ">
+  <div class="row mb-3">
+    <input class="btn btn-primary text-center" type="button" onclick="SeccionDifuntosABM(0)" value="Nuevo Difunto" id="" style="background-color: #DDB445;border-color: #54328D;color: #54328D;">
+  </div>
+  
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Activo</th>
+        <th scope="col">Cambiar Estado</th>
+        <th scope="col">Modificar</th>
+        <th scope="col">QR</th>
+
+      </tr>
+    </thead>
+    <tbody id="GrillaDifunto">
+      
+
+    </tbody>
+  </table>
+</div>
+
+
+  <div id="EntidadesABM" class="container">
+    <form>
+      <h1 class="text-center">ABM Entidad</h1>
+    
+
+      <div id="DatosGenerales" class="container">
+    
+        <div class="row mt-4">
+          <div class="col-12 col-sm-6 col-md-4">
+            <label for="cbo_Categoria">Categoria</label><br>
+            <select onchange="CargarEntidadTipo(CboCategoria.value)"  id="cbo_Categoria" class="Tamaño">
+              <option value="1"></option>
+            </select>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <label id="lbl_EntidadTipo" for="cbo_EntidadTipo">Tipo de Entidad</label><br>
+            <select   id="cbo_EntidadTipo" class="Tamaño">
+              <option value="1"></option>
+            </select>
+          </div>
+        </div>
+          <hr>
+        <div class="row mt-4">
+  
+        <div class="col-12 col-sm-6 col-md-4">
+        <label id="lbl_RazonSocial" for="txt_RazonSocial">Razon Social</label><br>
+        <input type="text" id="txt_RazonSocial" class="Tamaño" placeholder="Escribe aquí">
+        </div>
+  
+        <div class="col-12 col-sm-6 col-md-4">
+        <label id="lbl_Fantasia" for="txt_Fantasia">Fantasia</label><br>
+        <input type="text" id="txt_Fantasia" class="Tamaño" placeholder="Escribe aquí">
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+        <label id="lbl_Fundacion" for="dto_Fundacion">Fecha fundacion</label><br>
+        <input type="date" id="dto_Fundaciom" class="Tamaño">
+        </div>
+  
+        <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_Direccion">Direccion</label><br>
+        <input type="text" id="txt_Direccion" class="Tamaño" placeholder="Escribe aquí">
+        </div>
+  
+        <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_Ubicacion">Ubicacion</label><br>
+        <input type="text" id="txt_Ubicacion" class="Tamaño" placeholder="Escribe aquí">
+        </div>
+  
+        <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_Horarios">Horarios</label><br>
+        <input type="text" id="txt_Horarios" class="Tamaño" placeholder="Escribe aquí">
+        </div>
+  
+  
+  
+        </div>
+        <hr>
+        <div class="row mt-4">
+        <div class="col-12 col-sm-6  col-md-4">
+          <label for="cbo_Pais">Pais</label><br>
+          <select onchange="CargarProvincias(CboPais.value)" id="cbo_Pais" class="Tamaño">
+            <option value="2"></option>
+          </select>
+        </div>
+        <div class="col-12 col-sm-6  col-md-4">
+          <label for="cbo_Provincia">Provincia</label><br>
+          <select  onchange="CargarLocalidades(CboProvincia.value)"  id="cbo_Provincia" class="Tamaño">
+            <option value="2"></option>
+          </select>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4">
+          <label for="cbo_Localidad">Localidad</label><br>
+          <select  id="cbo_Localidad" class="Tamaño">
+            <option value="2"></option>
+          </select>
+        </div>
+      
+
+      
+        </div>
+        <hr> 
+        <div class="row mt-4">
+  
+        <div class="col-12" >
+        <label for="txt_InformacionGeneral">Informacion general</label><br>
+        <textarea  id="txt_InformacionGeneral" placeholder="Escribe aquí" cols="30" rows="5" style="width: 100%;"></textarea>
+        </div>
+        </div>
+        <hr>
+        <div class="row mt-4">
+    
+          <div class="container" id="Multimedia">
+            <div class="col-12 align-content-center">
+              <div class="col-12">
+                <h5>Seleccione las imagenes</h5>
+                <p>Click en la imagen para quitarlas</p><br>
+                <input onchange="return CargarImagenes()" type="file"  id="inp_Imagen" accept="image/png, image/jpeg" multiple>
+              </div>
+              <div class="">
+                <div id="add-photo-container" class="row"></div>
+              </div>
+                
+      <br>
+
+      <hr>
+  
+      <div class="">
+        <h5 class=" mt-3" id="">Imagenes Cargadas</h5>
+        <p>Click en la imagen para desactivarlas</p>
+
+        <div id="Modificar-photo-container" class="row">
+
+        </div>
+      </div>
+      <br>
+            </div>
+          </div>
+
+        <hr>
+        <div class="row mt-4">
+
+        <div class="row" id="DetalleCementerio">
+
+        <div class="col-12 col-sm-6 col-md-4">
+        <label for="txt_Tamaño">Tamaño</label><br>
+        <input type="number" id="txt_Tamaño" class="Tamaño" placeholder="Escribe aquí">
+        </div>   
+        <div class="col-12 col-sm-6 col-md-4">
+        <label for="cbo_UnidadMedida">Unidad Medida</label><br>
+        <select  id="cbo_UnidadMedida" class="Tamaño">
+          <option value="1"></option>
+        </select>
+        </div>
+        <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_CantidadTumbas">Cantidad de tumbas</label><br>
+        <input type="number" id="txt_CantidadTumbas" class="Tamaño" placeholder="Escribe aquí">
+        </div>
+  
+        </div>
+
+        </div>
+        <div class="row mt-4">
+          <div class="text-center my-3">
+          <input class="btn btn-primary" type="button" onclick="AgregarDetalle(CboCategoria.value)" value="Guardar" id="btn_Guardar">
+          <input class="btn btn-danger" type="button"  onclick="LimpiarCamposEntidades(),SeccionGrillaEntidades()" value="Cancelar" id="btn_Cancelar">
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+
+
+
+  <div id="DifuntosABM" class="container">
+    <h1 class="text-center">ABM Difuntos</h1>
+  
+    <div class="row mt-4">
+      <div class="col-12 col-sm-6 col-md-4">
+        <label for="txt_NombreDifunto">Nombre del difunto</label><br>
+        <input type="text" id="txt_NombreDifunto" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_ApellidoDifunto">Apellido del difunto</label><br>
+        <input type="text" id="txt_ApellidoDifunto" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <label for="dto_NacimientoDifunto">Fecha Nacimiento</label><br>
+        <input type="date" id="dto_NacimientoDifunto" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <label for="dto_FallecimientoDifunto">Fecha Fallecimiento</label><br>
+        <input type="date" id="dto_FallecimientoDifunto" class="Tamaño">
+      </div>
+  
+      <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_NacimientoDifunto">Lugar de Nacimiento</label><br>
+        <input type="text" id="txt_NacimientoDifunto" class="Tamaño">
+      </div>
+      
+      <div class="col-12 col-sm-6  col-md-4">
+        <label for="txt_FallecimientoDifunto">Lugar de Fallecimiento</label><br>
+        <input type="text" id="txt_FallecimientoDifunto" class="Tamaño">
+      </div>
+      
+    </div>
+    
+    <hr>
+  
+    <div class="row">
+      <div class="col-12 col-sm-6  col-md-4">
+          <label for="txt_Padres">Nombre de sus Padres</label><br>
+          <input type="text" id="txt_Padres" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6  col-md-4">
+          <label for="txt_Conyuge">Nombre de su Conyuge</label><br>
+          <input type="text" id="txt_Conyuge" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+          <label for="dto_Funeral">Fecha del Funeral</label><br>
+          <input type="date" id="dto_Funeral" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6  col-md-4">
+          <label for="txt_Funeral">Lugar de su Funeral</label><br>
+          <input type="text" id="txt_Funeral" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6  col-md-4">
+          <label for="txt_Latitud">Ubicacion Latitud</label><br>
+          <input type="text" id="txt_Latitud" class="Tamaño">
+      </div>
+      <div class="col-12 col-sm-6  col-md-4">
+          <label for="txt_Longitud">Ubicacion Longitud</label><br>
+          <input type="text" id="txt_Longitud" class="Tamaño">
+      </div>
+    </div>
+  
+    <hr>
+  
+    <div class="row">
+      
+          <div class="col-12 col-sm-6  col-md-4">
+            <label for="cbo_Cementerio">Cementerio</label><br>
+            <select  id="cbo_Cementerio" class="Tamaño">
+              <option value="1"></option>
+            </select>
+          </div>
+    
+        <div class="col-12 " >
+          <label for="txt_CausaMuerte">Causa de Muerde</label><br>
+          <textarea class="w-100"  id="txt_CausaMuerte" placeholder="Escribe aquí" cols="30" rows="3" style="width: 100%;"></textarea>
+        </div>
+    </div>
+    
+    <hr> 
+  
+    <div class="container" id="MultimediaDifuntos">
+      <div class="col-12 align-content-center">
+        <div class="col-12">
+          <h5>Seleccione las imagenes</h5>
+          <p>Click en la imagen para quitarlas</p><br>
+          <input onchange="return CargarImagenesDifuntos()" type="file"  id="inp_ImagenDifuntos" accept="image/png, image/jpeg" multiple>
+        </div>
+        <div class="">
+          <div id="add-photo-containerDifuntos" class="row">
+
+          </div>
+        </div>
+  
+      <br>
+      <hr>
+  
+      <div class="">
+        <h5 class=" mt-3" id="">Imagenes Cargadas</h5>
+        <p>Click en la imagen para desactivarlas</p>
+        <div id="Modificar-photo-containerDifuntos" class="row">
+
+        </div>
+      </div>
+      <br>
+    </div>
+    </div>
+  
+  
+    <hr>
+  
+    <div class="text-center my-3">
+      <input class="btn btn-primary" type="button" onclick="AgregarDifunto()" value="Guardar" id="btn_Guardar">
+      <input class="btn btn-danger" type="button"  onclick="LimpiarCamposDifuntos(),SeccionGrillaDifuntos();" value="Cancelar" id="btn_Cancelar">
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" id="ModalQr">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="NombreDifunto">Nombre del Difunto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-center">
+            <div id="codigoqr" class="mt-1"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Compartir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div id="NavegacionDispositivos" class="d-flex d-lg-none">
+        <div class="mobile_item"><a class="nav-link"  onclick="SeccionInicio()" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16"><path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/></svg></a></div>
+        <div class="mobile_item"><a class="nav-link"  onclick="SeccionGrillaEntidades()" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-building-add" viewBox="0 0 16 16"><path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z"/><path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1V1Z"/><path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/></svg></a></div>
+        <div class="mobile_item"><a class="nav-link"  onclick="SeccionComprarQr()" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a></div>
+        <div class="mobile_item"><a class="nav-link"  onclick="SeccionGrillaDifuntos()" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16"><path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/><path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/></svg></a></div>
+        <div class="mobile_item"><a class="nav-link"  onclick="" href="#" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/></svg></a></div>
+    </div>
+</div>
+
+
+    <script src='https://www.paypal.com/sdk/js?client-id=Ad7WLJDRZ7OW1ZNEQ9t3AipjrXut_vzV9A5K-j-pXxWM_l1Ifg4dZA4aQdslxfyLir5jy2SugkVNuo1B&currency=USD'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+
+  <!-- <script src="js/login.js"></script> -->
+  <script src="js/DeserealizeToken.js"></script>
+  <script src="js/jwt-decode.js"></script>
+  <script src="js/Paypal.js"></script>
+  <script src="js/URL-API.js"></script>
+  <script src="js/abm.js"></script>
+  <script>
+$(document).ready(function(){
+  SeccionInicio()
+
+})
+
+$(document).on("click", "#add-photo-container .image-wrapper", function (e) {
+        $(this).parent().remove();
+    });
+
+$(document).on("click", "#add-photo-containerDifuntos .image-wrapper", function (e) {
+        $(this).parent().remove();
+    });
+
+function SeccionInicio(){
+  $("#EntidadesABM").hide();
+  $("#DifuntosABM").hide();
+  $("#Bienvenido").show()
+  $("#DetalleCementerio").hide()
+  $("#Multimedia").hide()
+  $("#GrillaEntidades").hide();
+  $("#GrillaDifuntos").hide();
+  $("#ComprarQr").hide();
+  BuscarInformacion();
+  var paypalBoton = $("#paypal-button-container-5usd");
+  paypalBoton.empty()
+  var paypalBoton1 = $("#paypal-button-container-30usd");
+  paypalBoton1.empty()
+  var paypalBoton2 = $("#paypal-button-container-150usd");
+  paypalBoton2.empty()
+}
+
+function SeccionGrillaEntidades(){
+  $("#DifuntosABM").hide();
+  $("#Bienvenido").hide();
+  $("#DetalleCementerio").hide();
+  $("#GrillaEntidades").hide();
+  $("#GrillaDifuntos").hide();
+  $("#EntidadesABM").hide();
+  $("#ComprarQr").hide();
+
+  $("#GrillaEntidades").show();
+  CargarGrilla();
+}
+
+function SeccionEntidadesABM(id){
+
+  if (id == 0){
+    $("#EntidadesABM").show();
+    $("#DifuntosABM").hide();
+    $("#Bienvenido").hide();
+    $("#DetalleCementerio").hide();
+    $("#GrillaEntidades").hide();
+    $("#GrillaDifuntos").hide();
+    $("#Multimedia").show();
+    $("#ComprarQr").hide();
+
+
+    CargarPaises();
+    CargarProvincias(CboPais.value);
+    CargarUnidad();
+    CargarCategoria();
+    CargarEntidadTipo(CboCategoria.value);
+
+
+    setTimeout(function () {
+      CargarLocalidades(CboProvincia.value);
+      CargarEntidadTipo(0)
+    }, 400);
+    LimpiarCamposEntidades();
+
+  }else{
+    $("#EntidadesABM").show();
+    $("#DifuntosABM").hide();
+    $("#Bienvenido").hide();
+    $("#DetalleCementerio").hide();
+    $("#GrillaEntidades").hide();
+    $("#Multimedia").show();
+    $("#ComprarQr").hide();
+    // CargarPaises();
+    // CargarProvincias(CboPais.value);
+    // CargarUnidad();
+    // CargarCategoria();
+    // CargarEntidadTipo(CboCategoria.value);
+    // setTimeout(function () {
+    //   CargarLocalidades(CboProvincia.value);
+    //   CargarEntidadTipo(0)
+    // }, 400);
+    CargarModificaciones(id);
+}
+}
+
+// function SeccionComprarQr(){
+
+//   $("#EntidadesABM").hide();
+//   $("#DifuntosABM").hide();
+//   $("#Bienvenido").hide();
+//   $("#DetalleCementerio").hide();
+//   $("#GrillaEntidades").hide();
+//   $("#Multimedia").hide();
+//   $("#ComprarQr").show();
+  
+// }
+
+function SeccionGrillaDifuntos(){  
+  $("#DifuntosABM").hide();
+  $("#Bienvenido").hide();
+  $("#DetalleCementerio").hide();
+  $("#GrillaEntidades").hide();
+  $("#GrillaDifuntos").hide();
+  $("#EntidadesABM").hide();
+  $("#ComprarQr").hide();
+  $("#MultimediaDifuntos").hide()
+
+  $("#GrillaDifuntos").show();
+
+  CargarGrillaDifuntos();
+}
+
+function SeccionDifuntosABM(id){
+
+if (id == 0){
+
+$("#EntidadesABM").hide();
+$("#Bienvenido").hide();
+$("#GrillaEntidades").hide();
+$("#GrillaDifuntos").hide();
+$("#DetalleCementerio").hide();
+
+$("#DifuntosABM").show();
+$("#MultimediaDifuntos").show();
+
+LimpiarCamposDifuntos();
+CargarCementerios()
+
+}else{
+$("#EntidadesABM").hide();
+$("#Bienvenido").hide();
+$("#GrillaEntidades").hide();
+$("#GrillaDifuntos").hide();
+$("#DetalleCementerio").hide();
+
+$("#DifuntosABM").show();
+$("#MultimediaDifuntos").show();
+
+LimpiarCamposDifuntos();
+CargarModificacionesDifuntos(id);
+}
+
+
+}
+
+function Deslogearse(){
+localStorage.clear();
+location.replace("login.html")
+console.log("Deslogeo")
+}
+
+</script>
+
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</body>
+</html>
